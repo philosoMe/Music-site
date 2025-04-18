@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Background Music Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background: #fff0f6;
+    }
+
+    .toggle-btn {
+      padding: 10px 20px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to My Music Page</h1>
+  <p>Click the button to play or pause the music.</p>
+  <button class="toggle-btn" onclick="toggleAudio()">Pause Music</button>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="aashiyan.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const audio = document.getElementById("bgMusic");
+    const button = document.querySelector(".toggle-btn");
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+        button.textContent = "Pause Music";
+      } else {
+        audio.pause();
+        button.textContent = "Play Music";
+      }
+    }
+
+    // Ensure audio plays after user interaction
+    document.body.addEventListener('click', () => {
+      audio.play().catch(() => {
+        console.log("Autoplay failed. User must interact first.");
+      });
+    }, { once: true });
+  </script>
+</body>
+</html>
